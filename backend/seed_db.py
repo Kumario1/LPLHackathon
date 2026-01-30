@@ -1,99 +1,123 @@
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
-from backend.database import SessionLocal, engine
-from backend.models import Advisor, Household, Account, Workflow, Task, Document
+from backend.database import SessionLocal, engine, Base
+from backend.models import Advisor, Household, Account, Workflow, Task, Document, AuditEvent
 
 def seed_db():
-    db = SessionLocal()
-    
-    # Check if we already have data
-    if db.query(Advisor).first():
-        print("Database already seeded.")
-        return
+    # Re-create tables since schema changed
+    print("Dropping and recreating tables...")
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
 
+    db = SessionLocal()
     print("Seeding database...")
 
-    # 1. Create Advisor
-    advisor = Advisor(name="Jane Doe", email="jane.doe@lpl.com")
-    db.add(advisor)
+    # 1. Advisor
+    jane = Advisor(
+        name="Jane Doe", 
+        email="jane.doe@example.com", 
+        channel="independent",
+        experience_years=12
+    )
+    db.add(jane)
     db.commit()
-    db.refresh(advisor)
+    db.refresh(jane)
 
-    # 2. Create Households
-    households_data = [
-        {"name": "The Smith Family", "status": "ONBOARDING"},
-        {"name": "Jones Joint Account", "status": "ACAT_INITIATED"},
-        {"name": "Dr. Emily Wong", "status": "COMPLETED"},
-    ]
+    # 2. Households (3 families)
+    h1 = Household(advisor_id=jane.id, name="John & Mary Smith", status="IN_PROGRESS", eta_date=datetime.now() + timedelta(days=20), risk_score=15.0)
+    h2 = Household(advisor_id=jane.id, name="Acme LLC", status="AT_RISK", eta_date=datetime.now() + timedelta(days=45), risk_score=80.0)
+    h3 = Household(advisor_id=jane.id, name="Garcia Family", status="COMPLETED", eta_date=datetime.now() - timedelta(days=5), risk_score=5.0)
     
-    households = []
-    for h_data in households_data:
-        h = Household(advisor_id=advisor.id, **h_data)
-        db.add(h)
-        households.append(h)
+    households = [h1, h2, h3]
+    db.add_all(households)
+    db.commit()
+    for h in households: db.refresh(h)
+
+    # 3. Accounts
+    # Smith
+    a1 = Account(household_id=h1.id, account_number="S-1001", type="IRA", custodian="LPL", status="OPEN", asset_value=500000.0)
+    a2 = Account(household_id=h1.id, account_number="S-1002", type="BROKERAGE", custodian="SCHWAB", status="TRANSFER_IN_PROGRESS", asset_value=1200000.0)
     
+    # Acme (One rejected!)
+    a3 = Account(household_id=h2.id, account_number="A-2001", type="ADVISORY", custodian="FIDELITY", status="TRANSFER_REJECTED", asset_value=3000000.0)
+    a4 = Account(household_id=h2.id, account_number="A-2002", type="BROKERAGE", custodian="LPL", status="OPEN", asset_value=50000.0)
+
+    # Garcia
+    a5 = Account(household_id=h3.id, account_number="G-3001", type="IRA", custodian="LPL", status="OPEN", asset_value=250000.0)
+    a6 = Account(household_id=h3.id, account_number="G-3002", type="ROTH_IRA", custodian="LPL", status="OPEN", asset_value=150000.0)
+
+    accounts = [a1, a2, a3, a4, a5, a6]
+    db.add_all(accounts)
     db.commit()
-    for h in households:
-        db.refresh(h)
 
-    # 3. Create Accounts (6-9 accounts)
-    accounts_data = [
-        # Smith
-        {"household_id": households[0].id, "account_number": "111-222-333", "registration_type": "JOINT_WROS", "custodian": "LPL"},
-        {"household_id": households[0].id, "account_number": "111-222-444", "registration_type": "IRA_ROTH", "custodian": "LPL"},
-        {"household_id": households[0].id, "account_number": "EXT-999-001", "registration_type": "INDIVIDUAL", "custodian": "SCHWAB"},
-        # Jones
-        {"household_id": households[1].id, "account_number": "555-666-777", "registration_type": "JOINT_WROS", "custodian": "LPL"},
-        {"household_id": households[1].id, "account_number": "555-666-888", "registration_type": "IRA_SEP", "custodian": "FIDELITY"},
-        # Wong
-        {"household_id": households[2].id, "account_number": "888-999-000", "registration_type": "INDIVIDUAL", "custodian": "LPL"},
-        {"household_id": households[2].id, "account_number": "888-999-111", "registration_type": "TRUST", "custodian": "LPL"},
-    ]
-    
-    for a_data in accounts_data:
-        a = Account(**a_data)
-        db.add(a)
-
-    # 4. Create Workflows and Tasks
-    # Workflow for Smith (Onboarding)
-    wf_smith = Workflow(household_id=households[0].id, advisor_id=advisor.id, type="ONBOARDING", status="IN_PROGRESS")
-    db.add(wf_smith)
+    # 4. Workflow
+    wf = Workflow(
+        advisor_id=jane.id, 
+        name="Recruited advisor onboarding – Jane Doe", 
+        type="RECRUITED_ADVISOR",
+        started_at=datetime.now() - timedelta(days=10),
+        target_completion_at=datetime.now() + timedelta(days=50)
+    )
+    db.add(wf)
     db.commit()
-    db.refresh(wf_smith)
+    db.refresh(wf)
 
-    tasks_smith = [
-        {"workflow_id": wf_smith.id, "description": "Gather KYC Documents", "status": "COMPLETED", "due_date": datetime.now() - timedelta(days=2)},
-        {"workflow_id": wf_smith.id, "description": "Open Accounts", "status": "PENDING", "due_date": datetime.now() + timedelta(days=1)},
-        {"workflow_id": wf_smith.id, "description": "Initiate ACAT Transfer", "status": "PENDING", "due_date": datetime.now() + timedelta(days=5)},
-        {"workflow_id": wf_smith.id, "description": "Schedule Strategy Meeting", "status": "PENDING", "due_date": datetime.now() + timedelta(days=10)},
-    ]
-    for t in tasks_smith:
-        db.add(Task(**t))
-
-    # Workflow for Jones (ACAT focused)
-    wf_jones = Workflow(household_id=households[1].id, advisor_id=advisor.id, type="ACAT_TRANSFER", status="IN_PROGRESS")
-    db.add(wf_jones)
-    db.commit()
-    db.refresh(wf_jones)
-
-    tasks_jones = [
-        {"workflow_id": wf_jones.id, "description": "Submit Transfer Forms", "status": "COMPLETED", "due_date": datetime.now() - timedelta(days=5)},
-        {"workflow_id": wf_jones.id, "description": "Verify Assets Received", "status": "PENDING", "due_date": datetime.now() + timedelta(days=3)},
-    ]
-    for t in tasks_jones:
-        db.add(Task(**t))
+    # 5. Tasks
+    tasks_data = [
+        # Smith Tasks
+        {"workflow_id": wf.id, "household_id": h1.id, "name": "Collect KYC Docs", "owner_role": "ADVISOR", "status": "COMPLETED", "priority": 1, "sla_due_at": datetime.now() - timedelta(days=2)},
+        {"workflow_id": wf.id, "household_id": h1.id, "name": "Initiate ACAT", "owner_role": "OPS", "status": "IN_PROGRESS", "priority": 1, "sla_due_at": datetime.now() + timedelta(days=1)},
+        {"workflow_id": wf.id, "household_id": h1.id, "name": "Review Portfolio", "owner_role": "ADVISOR", "status": "PENDING", "priority": 2, "sla_due_at": datetime.now() + timedelta(days=5)},
         
-    # Documents
-    docs = [
-         {"household_id": households[0].id, "name": "Smith_Account_App.pdf", "document_type": "NEW_ACCOUNT", "nigo_status": "CLEAN"},
-         {"household_id": households[0].id, "name": "Smith_Transfer_Auth.pdf", "document_type": "ACAT", "nigo_status": "NIGO"}, # Defect!
-         {"household_id": households[1].id, "name": "Jones_Transfer.pdf", "document_type": "ACAT", "nigo_status": "CLEAN"},
+        # Acme Tasks
+        {"workflow_id": wf.id, "household_id": h2.id, "name": "Resolve NIGO on App", "owner_role": "ADVISOR", "status": "PENDING", "priority": 1, "sla_due_at": datetime.now() - timedelta(days=1)}, 
+        {"workflow_id": wf.id, "household_id": h2.id, "name": "Schedule Welcoming Call", "owner_role": "ADVISOR", "status": "BLOCKED", "priority": 2, "sla_due_at": datetime.now() + timedelta(days=7)},
+        {"workflow_id": wf.id, "household_id": h2.id, "name": "Resolve ACAT rejection for account A-2001", "owner_role": "OPS", "status": "PENDING", "priority": 1, "sla_due_at": datetime.now()}, # Generated by "webhook" logic conceptually
+
+        # Garcia Tasks
+        {"workflow_id": wf.id, "household_id": h3.id, "name": "Finalize Transfer", "owner_role": "OPS", "status": "COMPLETED", "priority": 1, "sla_due_at": datetime.now() - timedelta(days=10)},
+        {"workflow_id": wf.id, "household_id": h3.id, "name": "Send Welcome Kit", "owner_role": "ADVISOR", "status": "COMPLETED", "priority": 3, "sla_due_at": datetime.now() - timedelta(days=8)},
     ]
-    for d in docs:
-        db.add(Document(**d))
+
+    for t_data in tasks_data:
+        t = Task(**t_data)
+        db.add(t)
+    
+    # 6. Documents
+    docs_data = [
+        {"household_id": h1.id, "account_id": a1.id, "name": "Smith_IRA_App.pdf", "type": "ACCOUNT_OPEN", "nigo_status": "CLEAN", "storage_url": "s3://bucket/smith_ira.pdf"},
+        {"household_id": h2.id, "account_id": a3.id, "name": "Acme_Corporate_Res.pdf", "type": "KYC", "nigo_status": "DEFECTS_FOUND", "defects_json": {"issues": ["Missing signature on p.4"]}, "storage_url": "s3://bucket/acme_corp.pdf"},
+    ]
+    for d_data in docs_data:
+        d = Document(**d_data)
+        db.add(d)
 
     db.commit()
-    print("Database seeded successfully with Jane Doe, 3 households, 7 accounts, 2 workflows, and 6 tasks.")
+
+    # 7. Seed Audit Events (Simulated Webhooks)
+    print("Seeding Audit Events...")
+    audit1 = AuditEvent(
+        event_type="WEBHOOK_DOCUMENT_UPLOADED",
+        actor_type="SYSTEM",
+        actor_id="transfer_system",
+        entity_type="Household",
+        entity_id=str(h1.id),
+        payload_json={"event_type": "DOCUMENT_UPLOADED", "household_id": h1.id, "filename": "Random_Doc.pdf"}
+    )
+    
+    audit2 = AuditEvent(
+        event_type="WEBHOOK_ACAT_REJECTED", 
+        actor_type="SYSTEM", 
+        actor_id="transfer_system",
+        entity_type="Account",
+        entity_id=str(a3.id),
+        payload_json={"event_type": "ACAT_REJECTED", "account_id": a3.id, "reason": "Name Mismatch"}
+    )
+    db.add(audit1)
+    db.add(audit2)
+    
+    db.commit()
+    print("Database seeded successfully with Webhook/Enhancement data!")
     db.close()
 
 if __name__ == "__main__":

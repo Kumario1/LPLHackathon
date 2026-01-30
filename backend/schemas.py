@@ -1,72 +1,72 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Optional
 from datetime import datetime
 
 # --- Task Schemas ---
-class TaskBase(BaseModel):
-    description: str
-    status: str
-    owner: str
-
-class Task(TaskBase):
+class TaskSchema(BaseModel):
     id: int
-    workflow_id: int
-    due_date: Optional[datetime] = None
-
-    class Config:
-        from_attributes = True
+    name: str
+    owner_role: str
+    status: str
+    priority: int
+    sla_due_at: Optional[datetime] = None
+    blocked_by_task_id: Optional[int] = None
+    
+    # Enable ORM mode for Pydantic v2
+    model_config = ConfigDict(from_attributes=True)
 
 class TaskUpdateRequest(BaseModel):
     status: str
-
-# --- Document Schemas ---
-class DocumentBase(BaseModel):
-    name: str
-    document_type: str
-    nigo_status: str
-
-class Document(DocumentBase):
-    id: int
-    household_id: int
-
-    class Config:
-        from_attributes = True
+    note: Optional[str] = None
 
 # --- Account Schemas ---
-class AccountBase(BaseModel):
-    account_number: str
-    registration_type: str
-    custodian: str
-
-class Account(AccountBase):
+class AccountSchema(BaseModel):
     id: int
-    household_id: int
+    type: str # IRA, BROKERAGE, etc
+    custodian: str
+    status: str
+    asset_value: float = 0.0
+    
+    model_config = ConfigDict(from_attributes=True)
 
-    class Config:
-        from_attributes = True
+# --- Document Schemas ---
+class DocumentSchema(BaseModel):
+    id: int
+    name: str
+    type: str
+    nigo_status: str
+    
+    model_config = ConfigDict(from_attributes=True)
 
 # --- Household Schemas ---
-class HouseholdBase(BaseModel):
-    name: str
-    status: str
-
-class HouseholdSummary(HouseholdBase):
+class HouseholdSummary(BaseModel):
     id: int
-    advisor_id: int
+    name: str
+    advisor_name: str
+    status: str
+    eta_date: Optional[datetime] = None
+    risk_score: Optional[float] = None
+    accounts_count: int = 0
+    # New fields
+    open_tasks_count: int = 0
+    nigo_issues_count: int = 0
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
-class HouseholdDetail(HouseholdSummary):
-    accounts: List[Account] = []
-    # Simplified approach: fetch pending tasks via workflow link or separate query 
-    # For now, let's assume we might enrich this in the service layer or separate API call
-    # but the prompt asked for "household + accounts + tasks"
-    # To include tasks we'd need to nest through Workflow -> Tasks
+class HouseholdDetail(BaseModel):
+    id: int
+    name: str
+    advisor_name: str
+    status: str
+    eta_date: Optional[datetime] = None
+    risk_score: Optional[float] = None
     
-    # We will add a flattened list of tasks here for simplicity in this view
-    tasks: List[Task] = []
-    documents: List[Document] = []
+    # New fields
+    open_tasks_count: int = 0
+    nigo_issues_count: int = 0
+    progress_percent: float = 0.0
+
+    accounts: List[AccountSchema] = []
+    tasks: List[TaskSchema] = []
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
