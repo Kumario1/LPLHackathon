@@ -3,6 +3,6 @@ uvicorn
 sqlalchemy
 pydantic
 pydantic-settings
-alembic
 python-multipart
-# psycopg2-binary # Uncomment for Postgres
+httpx
+pytest

@@ -100,12 +100,31 @@ curl -X POST http://127.0.0.1:8000/api/webhooks/portal \
      -d '{"event_type": "DOCUMENT_UPLOADED", "household_id": 1, "filename": "Correct_ID.pdf"}'
 ```
 
-## Project Structure
+## Health Checks
 
-*   `backend/main.py`: Application entry point.
-*   `backend/models.py`: SQLAlchemy definitions (the Database Schema).
-*   `backend/schemas.py`: Pydantic models (the API Schema).
-*   `backend/routers/`:
-    *   `transitions.py`: Core reads for the dashboard.
-    *   `tasks.py`: State management.
-    *   `webhooks.py`: External event ingestion.
+The backend provides production-ready health probes:
+
+- **Liveness**: `GET /health/live` (Returns 200 OK)
+- **Readiness**: `GET /health/ready` (Returns 200 if Orchestrator is loaded)
+
+---
+
+## 🛠 For Integrators (AI/Skills/Frontend)
+
+The backend is "Skill-Ready". We have defined strict interfaces for all intelligent capabilities.
+
+### 1. Architecture
+*   **Orchestrator** (`backend/orchestrator.py`): The central interaction point for skills.
+*   **Interfaces** (`backend/skills/interfaces.py`): Typed definition of what skills must do.
+*   **Stubs**: Currently, all skills use "Stub" implementations that return placeholder data.
+
+### 2. How to Add a Skill
+1.  Navigate to `backend/skills/interfaces.py`.
+2.  Implement a new class inheriting from the abstract base class (e.g., `RealDocumentIntelligence(DocumentIntelligence)`).
+3.  Inject your implementation in `backend/orchestrator.py` by replacing the stub.
+
+### 3. Testing
+Run the test suite to ensure the shell is intact:
+```bash
+pytest backend/tests
+```
