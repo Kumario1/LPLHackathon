@@ -52,21 +52,9 @@ async def receive_webhook(source: str, request: Request, db: Session = Depends(g
         doc_id = payload.get("document_id")
         household_id = payload.get("household_id")
         if household_id:
-            # Check if doc exists? If doc_id given, maybe Look up by ID? 
-            # If not found, create new.
-            # For this simple logic, if doc_id provided and generic ID matches, fine.
-            # But usually doc_id is external or internal. 
-            # Prompt says: "If document_id is provided, ensure there is a Document row... if not, create one"
-            # We assume payload document_id might map to internal ID or we just create a new one if we can't find it.
-            # Let's simple create a new doc if we don't strictly find it by some ID logic, 
-            # or just log it. 
-            # For simplicity: Always create if not present is tricky without common ID.
-            # Let's just create a new Document row if 'document_id' is NOT an integer we found.
-            pass # Logic below
+            # Check if doc exists by ID if provided, otherwise create new.
+            # For simplicity, we create a new document entry if not found.
             
-            # Simple implementation:
-            # If we were given an internal ID, try to find it. 
-            # If not found, create a new doc entry.
             doc_name = payload.get("filename", "Uploaded Document")
             doc_type = payload.get("doc_type", "OTHER")
             
