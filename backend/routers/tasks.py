@@ -55,25 +55,13 @@ def complete_task(task_id: int, request: TaskUpdateRequest, db: Session = Depend
     )
     db.add(audit)
     
-    # 4. Optional: Check parent household completion? 
-    # If all tasks for household are complete, update household status?
-    # Simple logic:
     if task.household_id:
-        # Check siblings
         household = db.query(Household).filter(Household.id == task.household_id).first()
         if household:
-             # Refresh household tasks to get latest state including this one (in session)
-             # But this task isn't committed yet. It is in session though.
-             # We can check all tasks for this household in DB.
              all_tasks = db.query(Task).filter(Task.household_id == household.id).all()
-             # Logic: if ALL other tasks are completed (or are THIS task), set household to COMPLETED?
-             # Be careful not to complete prematurely if fetching old state.
-             # Since we changed task.status in this session, checking objects in session should be fine.
              if all(t.status == "COMPLETED" for t in all_tasks):
-                 # Auto-complete household?
-                 # household.status = "COMPLETED" 
-                 # Maybe generic "IN_PROGRESS" is safer unless we are sure.
-                 # Let's leave it manual for now or "REVIEW_REQUIRED".
+                 # All tasks are complete. Logic for auto-completing household could go here.
+                 # For now, we leave the household status as-is to allow for manual review.
                  pass
 
     db.commit()
