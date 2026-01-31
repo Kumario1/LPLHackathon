@@ -6,4 +6,7 @@ pydantic-settings
 python-multipart
 httpx
 pytest
+<<<<<<< HEAD
 psycopg2-binary
+=======
+>>>>>>> f1d1aa426238f82c0545c16a8a9d3ccecb041bd1

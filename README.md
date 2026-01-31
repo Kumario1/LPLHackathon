@@ -2,6 +2,10 @@
 
 Transition OS is an intelligent "System of Record" designed to streamline the complex process of advisor transitions. It serves as the backbone for the LPL Hackathon project, powering both the ops dashboard and **Clawdbot**, an AI agent that assists advisors and operations staff.
 
+**🚀 LIVE DEPLOYMENT**: This backend is currently running on AWS EC2 + RDS PostgreSQL.
+
+---
+
 ## Project Overview
 
 In the high-stakes world of financial advisor recruitment, transitioning a practice (households, accounts, assets) is a chaotic process involving thousands of documents and tasks. Transition OS solves this by providing:
@@ -12,14 +16,76 @@ In the high-stakes world of financial advisor recruitment, transitioning a pract
 4.  **Webhook Ingestion**: Simulates real-world integrations (e.g., DocuSign, ACAT feeds) to trigger automated workflows.
 5.  **AI-Ready APIs**: Designed specifically for consumption by LLM agents (Clawdbot) to answer questions like "Which households are at risk?" or "fix the NIGO issue on the Smith account."
 
+---
+
 ## Tech Stack
 
-*   **Framework**: FastAPI (Python 3.9+)
-*   **Database**: SQLAlchemy ORM with SQLite (Local) / PostgreSQL (Production-ready)
+*   **Framework**: FastAPI (Python 3.12)
+*   **Database**: PostgreSQL (AWS RDS)
+*   **Server**: AWS EC2 (Ubuntu 24.04)
 *   **Validation**: Pydantic v2
 *   **Architecture**: Modular Router/Controller pattern
 
-## Quick Start (Local Development)
+---
+
+## 🌐 Production Deployment
+
+The backend is deployed on AWS with the following architecture:
+
+```
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│   Client    │────▶│  AWS EC2    │────▶│  AWS RDS    │
+│  (Browser)  │     │  (FastAPI)  │     │ (PostgreSQL)│
+└─────────────┘     └─────────────┘     └─────────────┘
+                           │
+                           ▼
+                    ┌─────────────┐
+                    │  Clawdbot   │
+                    │  (AI Agent) │
+                    └─────────────┘
+```
+
+### Access the Live API
+
+| Endpoint | URL |
+|----------|-----|
+| Health Check | `http://54.221.139.68:8000/health` |
+| API Documentation | `http://54.221.139.68:8000/api/docs` |
+| Base API | `http://54.221.139.68:8000/api` |
+
+**Live at**: `54.221.139.68` (AWS EC2)
+
+### Server Management (EC2)
+
+```bash
+# SSH into your server
+ssh -i "your-key.pem" ubuntu@54.221.139.68
+
+# Check service status
+sudo systemctl status transition-os
+
+# View logs
+sudo journalctl -u transition-os -f
+
+# Restart the service
+sudo systemctl restart transition-os
+
+# Stop the service
+sudo systemctl stop transition-os
+```
+
+### Database Connection (RDS)
+
+```bash
+# Connect to RDS from EC2
+psql "postgresql://postgres:YOUR_PASSWORD@transition-os-db.csxq4yaemku3.us-east-1.rds.amazonaws.com:5432/postgres"
+```
+
+---
+
+## 💻 Local Development
+
+Want to run the backend locally for development?
 
 ### 1. Setup Environment
 
@@ -35,9 +101,19 @@ source venv/bin/activate
 pip install -r backend/requirements.txt
 ```
 
-### 2. Initialize & Seed Database
+### 2. Configure Environment
 
-We include a seed script that populates the database with realistic demo data, including "Jane Doe" (Advisor), 3 Households, various Accounts, and simulated Document defects.
+Create a `.env` file in the project root:
+
+```bash
+# For local SQLite development
+DATABASE_URL=sqlite:///./transition_os.db
+
+# Or connect to your RDS instance
+# DATABASE_URL=postgresql://postgres:PASSWORD@transition-os-db.csxq4yaemku3.us-east-1.rds.amazonaws.com:5432/postgres
+```
+
+### 3. Initialize & Seed Database
 
 ```bash
 # Set PYTHONPATH
@@ -46,19 +122,22 @@ export PYTHONPATH=$PYTHONPATH:.
 # Create tables
 python3 backend/init_db.py
 
-# Seed data
+# Seed demo data
 python3 backend/seed_db.py
 ```
 
-### 3. Run the Server
+### 4. Run the Server (Local)
 
 ```bash
 export PYTHONPATH=$PYTHONPATH:.
-uvicorn backend.main:app --reload
+uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
 ```
+
 The API will be available at `http://127.0.0.1:8000`.
 
-## API Usage Examples
+---
+
+## 🔌 API Usage Examples
 
 **Values to try**:
 *   **Advisor ID**: `1` (Jane Doe)
@@ -67,20 +146,19 @@ The API will be available at `http://127.0.0.1:8000`.
 ### 1. Dashboard View
 Get a summary of all transitions, including risk scores and open task counts.
 ```bash
-# Filter by status and advisor
-curl "http://127.0.0.1:8000/api/transitions?advisor_id=1&status=IN_PROGRESS"
+curl "http://54.221.139.68:8000/api/transitions?advisor_id=1&status=IN_PROGRESS"
 ```
 
 ### 2. Household Deep Dive
 Get details for a specific household, including accounts, tasks, and progress metrics.
 ```bash
-curl http://127.0.0.1:8000/api/transitions/1
+curl http://54.221.139.68:8000/api/transitions/1
 ```
 
 ### 3. Complete a Task
 Mark a task as completed. This logs an audit event in the background.
 ```bash
-curl -X POST http://127.0.0.1:8000/api/tasks/2/complete \
+curl -X POST http://54.221.139.68:8000/api/tasks/2/complete \
      -H "Content-Type: application/json" \
      -d '{"status": "COMPLETED", "note": "Resolved via Dashboard"}'
 ```
@@ -90,22 +168,29 @@ Trigger external events to see how the system reacts (e.g., creating new tasks o
 
 ```bash
 # Simulate an ACAT Transfer Rejection (Creates a new Ops task)
-curl -X POST http://127.0.0.1:8000/api/webhooks/transfer \
+curl -X POST http://54.221.139.68:8000/api/webhooks/transfer \
      -H "Content-Type: application/json" \
      -d '{"event_type": "ACAT_REJECTED", "account_id": 2, "reason": "Name mismatch"}'
 
 # Simulate a Document Upload
-curl -X POST http://127.0.0.1:8000/api/webhooks/portal \
+curl -X POST http://54.221.139.68:8000/api/webhooks/portal \
      -H "Content-Type: application/json" \
      -d '{"event_type": "DOCUMENT_UPLOADED", "household_id": 1, "filename": "Correct_ID.pdf"}'
 ```
 
-## Health Checks
+---
+
+## 🏥 Health Checks
 
 The backend provides production-ready health probes:
 
-- **Liveness**: `GET /health/live` (Returns 200 OK)
-- **Readiness**: `GET /health/ready` (Returns 200 if Orchestrator is loaded)
+```bash
+# Liveness probe
+ curl http://54.221.139.68:8000/health/live
+
+# Readiness probe
+curl http://54.221.139.68:8000/health/ready
+```
 
 ---
 
@@ -128,3 +213,117 @@ Run the test suite to ensure the shell is intact:
 ```bash
 pytest backend/tests
 ```
+
+---
+
+## 📁 Project Structure
+
+```
+LPL/
+├── backend/                  # FastAPI application
+│   ├── main.py              # Entry point
+│   ├── config.py            # Settings & environment
+│   ├── database.py          # SQLAlchemy setup
+│   ├── models.py            # Database models
+│   ├── schemas.py           # Pydantic schemas
+│   ├── orchestrator.py      # Skill orchestrator
+│   ├── routers/             # API routes
+│   │   ├── transitions.py
+│   │   ├── tasks.py
+│   │   ├── webhooks.py
+│   │   └── skills_api.py
+│   ├── skills/              # Skill interfaces
+│   │   └── interfaces.py
+│   └── tests/               # Test suite
+├── agents.md                # Architecture guide
+├── DEPLOYMENT.md            # Detailed deployment guide
+├── PROGRESS.md              # Project progress tracker
+├── ec2-setup.sh             # EC2 provisioning script
+├── transition-os.service    # Systemd service config
+├── Dockerfile               # Container config
+└── README.md                # This file
+```
+
+---
+
+## 🚀 Deployment Options
+
+### Current: EC2 + RDS (Production)
+- **Status**: ✅ Active
+- **URL**: `http://54.221.139.68:8000`
+- **Database**: AWS RDS PostgreSQL
+- **Docs**: See [DEPLOYMENT.md](DEPLOYMENT.md)
+
+### Alternative: AWS App Runner (Easier)
+- Good for quick demos
+- Auto-scaling included
+- See [DEPLOYMENT.md](DEPLOYMENT.md) for instructions
+
+### Alternative: Docker
+```bash
+docker build -t transition-os .
+docker run -p 8000:8000 -e DATABASE_URL=postgresql://... transition-os
+```
+
+---
+
+## 📝 Environment Variables
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `DATABASE_URL` | Database connection string | `postgresql://user:pass@host:5432/db` |
+| `PROJECT_NAME` | API title | `Transition OS` |
+| `LOG_LEVEL` | Logging level | `INFO`, `DEBUG` |
+| `ENVIRONMENT` | Deployment environment | `DEV`, `PROD` |
+
+---
+
+## 🤖 Connecting Clawdbot
+
+To connect your AI agent (Clawdbot) to this backend:
+
+```python
+# In Clawdbot config
+BACKEND_URL = "http://54.221.139.68:8000/api"
+```
+
+See `agents.md` for detailed integration instructions.
+
+---
+
+## 📊 Monitoring & Logs
+
+```bash
+# Real-time logs
+sudo journalctl -u transition-os -f
+
+# Recent logs (last 100 lines)
+sudo journalctl -u transition-os -n 100
+
+# System resources
+htop
+```
+
+---
+
+## 🆘 Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| Can't connect to API | Check EC2 security group allows port 8000 |
+| Database connection failed | Verify RDS security group allows EC2 |
+| Service won't start | Check logs: `sudo journalctl -u transition-os -n 50` |
+| Password issues | Verify `DATABASE_URL` in `/etc/systemd/system/transition-os.service` |
+
+---
+
+## 📚 Additional Documentation
+
+- [DEPLOYMENT.md](DEPLOYMENT.md) - Detailed AWS deployment instructions
+- [agents.md](agents.md) - AI agent architecture & guidelines
+- [PROGRESS.md](PROGRESS.md) - Current project status & roadmap
+- [API Docs](http://54.221.139.68:8000/api/docs) - Interactive Swagger UI
+
+---
+
+**Last Updated**: January 30, 2026
