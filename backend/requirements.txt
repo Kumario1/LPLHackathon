@@ -4,9 +4,6 @@ sqlalchemy
 pydantic
 pydantic-settings
 python-multipart
-<<<<<<< Updated upstream
 httpx
 pytest
-=======
 psycopg2-binary
->>>>>>> Stashed changes
