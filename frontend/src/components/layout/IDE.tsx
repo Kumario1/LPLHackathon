@@ -2,7 +2,6 @@ import { useState } from "react";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { Sidebar } from "../ide/Sidebar";
 import { EditorPane } from "../ide/EditorPane";
-import { AIPane } from "../ide/AIPane";
 import { CommandPalette } from "../ide/CommandPalette";
 import { TransitionsPanel } from "../ide/TransitionsPanel";
 import { cn } from "@/lib/utils";
@@ -10,7 +9,6 @@ import { FolderGit2, Check, Bell, Wifi, BookText } from "lucide-react";
 
 export const IDE = () => {
     const [leftCollapsed, setLeftCollapsed] = useState(false);
-    const [rightCollapsed, setRightCollapsed] = useState(false);
 
     return (
         <div className="h-screen w-screen bg-[#000000] text-foreground flex flex-col font-sans overflow-hidden">
@@ -35,7 +33,7 @@ export const IDE = () => {
                     <ResizableHandle className="bg-transparent w-2 hover:bg-primary/20 transition-colors rounded-full" />
 
                     {/* Center Stage: Vertical Split (Editor Top / Transitions Bottom) */}
-                    <ResizablePanel defaultSize={68} minSize={40} className="bg-transparent border-none">
+                    <ResizablePanel defaultSize={84} minSize={40} className="bg-transparent border-none">
                         <ResizablePanelGroup direction="vertical" className="gap-2">
                             {/* Top: Editor Tabs */}
                             <ResizablePanel defaultSize={70} minSize={30} className="bg-transparent border-none">
@@ -49,21 +47,6 @@ export const IDE = () => {
                                 <TransitionsPanel />
                             </ResizablePanel>
                         </ResizablePanelGroup>
-                    </ResizablePanel>
-
-                    <ResizableHandle className="bg-transparent w-2 hover:bg-primary/20 transition-colors rounded-full" />
-
-                    {/* Right Sidebar: AI & Comm */}
-                    <ResizablePanel
-                        defaultSize={20}
-                        minSize={15}
-                        maxSize={30}
-                        collapsible={true}
-                        onCollapse={() => setRightCollapsed(true)}
-                        onExpand={() => setRightCollapsed(false)}
-                        className="bg-transparent border-none"
-                    >
-                        <AIPane collapsed={rightCollapsed} />
                     </ResizablePanel>
 
                 </ResizablePanelGroup>
