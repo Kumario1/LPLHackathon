@@ -17,7 +17,7 @@ You do not perform AI/ML. You orchestrate backend calls only.
 
 ## Backend API assumptions
 
-- Base URL: `http://localhost:8000` (update as needed)
+- Base URL: `http://localhost:8000`
 - Create workflow: `POST /workflows`
   - Request JSON:
     ```json

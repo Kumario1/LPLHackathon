@@ -18,7 +18,7 @@ Use when:
 - Base URL: `http://localhost:8000`
 - Dashboard: `GET /workflows/{workflow_id}`
 - ETA prediction: `GET /predictions/eta/{workflow_id}`
-- Risk report: e.g. `GET /predictions/risk-report?from=YYYY-MM-DD&to=YYYY-MM-DD`
+- Risk report: e.g. `GET /predictions/risk-report?from=YYYY-MM-DD&to=YYYY-MM-DD` (Proposed)
 
 ## Behavior
 

@@ -1,13 +1,13 @@
-from fastapi import APIRouter, Depends, Request, HTTPException
-from sqlalchemy.orm import Session
 from datetime import datetime
-import json
+
+from fastapi import APIRouter, Depends, HTTPException, Request
+from sqlalchemy.orm import Session
 
 from backend.database import get_db
-from backend.models import AuditEvent, Document, Account, Task
-from backend.schemas import TaskSchema
+from backend.models import Account, AuditEvent, Document, Task
 
 router = APIRouter()
+
 
 @router.post("/webhooks/{source}")
 async def receive_webhook(source: str, request: Request, db: Session = Depends(get_db)):
@@ -41,10 +41,10 @@ async def receive_webhook(source: str, request: Request, db: Session = Depends(g
         actor_id=source,
         entity_type=entity_type,
         entity_id=entity_id,
-        payload_json=payload
+        payload_json=payload,
     )
     db.add(audit)
-    
+
     # 2. Handle specific events
     # DOCUMENT_UPLOADED
     if event_type == "DOCUMENT_UPLOADED":
@@ -54,25 +54,25 @@ async def receive_webhook(source: str, request: Request, db: Session = Depends(g
         if household_id:
             # Check if doc exists by ID if provided, otherwise create new.
             # For simplicity, we create a new document entry if not found.
-            
+
             doc_name = payload.get("filename", "Uploaded Document")
             doc_type = payload.get("doc_type", "OTHER")
-            
+
             # Create new doc
             new_doc = Document(
                 household_id=household_id,
                 name=doc_name,
                 type=doc_type,
-                nigo_status="UNKNOWN"
+                nigo_status="UNKNOWN",
             )
             db.add(new_doc)
-            db.commit() # Commit to generate ID
+            db.commit()  # Commit to generate ID
 
     # ESIGN_COMPLETED
     elif event_type == "ESIGN_COMPLETED":
         doc_id = payload.get("document_id")
         if doc_id:
-            # In a real app doc_id is internal ID. 
+            # In a real app doc_id is internal ID.
             # We try to cast to int
             try:
                 doc = db.query(Document).filter(Document.id == int(doc_id)).first()
@@ -84,38 +84,46 @@ async def receive_webhook(source: str, request: Request, db: Session = Depends(g
 
     # ACAT_REJECTED
     elif event_type == "ACAT_REJECTED":
-        account_id = payload.get("account_id") # This might be strings like "ACC_001", we need to map to int ID or account_number
+        account_id = payload.get(
+            "account_id"
+        )  # This might be strings like "ACC_001", we need to map to int ID or account_number
         if account_id:
             # Try finding by ID first, then account_number
             account = None
-            if isinstance(account_id, int) or (isinstance(account_id, str) and account_id.isdigit()):
-                 account = db.query(Account).filter(Account.id == int(account_id)).first()
-            
+            if isinstance(account_id, int) or (
+                isinstance(account_id, str) and account_id.isdigit()
+            ):
+                account = (
+                    db.query(Account).filter(Account.id == int(account_id)).first()
+                )
+
             if not account:
-                 account = db.query(Account).filter(Account.account_number == str(account_id)).first()
-            
+                account = (
+                    db.query(Account)
+                    .filter(Account.account_number == str(account_id))
+                    .first()
+                )
+
             if account:
                 account.status = "TRANSFER_REJECTED"
                 db.add(account)
-                
+
                 # Create Task
                 # "Resolve ACAT rejection for account {id}"
-                task_name = f"Resolve ACAT rejection for account {account.account_number}"
+                task_name = (
+                    f"Resolve ACAT rejection for account {account.account_number}"
+                )
                 new_task = Task(
-                    workflow_id=None, # Or find active workflow? Prompt didn't specify.
+                    workflow_id=None,  # Or find active workflow? Prompt didn't specify.
                     household_id=account.household_id,
                     name=task_name,
                     owner_role="OPS",
                     status="PENDING",
                     priority=1,
-                    sla_due_at=datetime.now() # Due now!
+                    sla_due_at=datetime.now(),  # Due now!
                 )
                 db.add(new_task)
 
     db.commit()
 
-    return {
-        "status": "received", 
-        "source": source, 
-        "event_type": event_type
-    }
+    return {"status": "received", "source": source, "event_type": event_type}

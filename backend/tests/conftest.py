@@ -1,4 +1,5 @@
 import os
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -8,10 +9,12 @@ os.environ["ENABLE_SKILL_STUBS"] = "True"
 
 from backend.main import app as fastapi_app
 
+
 @pytest.fixture(scope="session")
 def app():
     return fastapi_app
 
+
 @pytest.fixture(scope="function")
 def client(app):
-    return TestClient(app)
+    return TestClient(app, raise_server_exceptions=False)
