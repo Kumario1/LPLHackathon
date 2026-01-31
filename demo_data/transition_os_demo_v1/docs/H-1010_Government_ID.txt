@@ -1,4 +1,0 @@
-Doc Type: Government ID
-Name: Alex Sample
-DOB: 1984-06-12
-ID Number: ID-H-1010

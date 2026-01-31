@@ -1,7 +1,0 @@
-exception_id,household_id,account_id,rule_id,severity,queue,why,evidence,suggested_fix,status,created_at
-EX-4001,H-1002,ACCT-2003,ADVISORY_AGREEMENT_SIGNATURE_MISSING,High,Ops,Advisory Agreement missing client signature.,Advisory_Agreement: Signature field blank.,Obtain signed agreement and re-upload.,OPEN,2026-01-25T14:10:00Z
-EX-4002,H-1005,ACCT-2009,ADVISORY_AGREEMENT_SIGNATURE_MISSING,High,Ops,Advisory Agreement missing client signature.,Advisory_Agreement: Signature field blank.,Request client signature and re-upload.,OPEN,2026-01-26T09:30:00Z
-EX-4003,H-1003,ACCT-2005,BENEFICIARY_MISSING,Medium,Ops,Beneficiary designation missing for IRA.,Beneficiary_Designation: No beneficiaries listed.,Collect beneficiary form and re-upload.,OPEN,2026-01-27T11:15:00Z
-EX-4004,H-1006,ACCT-2010,BENEFICIARY_MISSING,Medium,Ops,Beneficiary designation missing for IRA.,Beneficiary_Designation: No beneficiaries listed.,Follow up for beneficiary designation.,OPEN,2026-01-28T16:40:00Z
-EX-4005,H-1004,ACCT-2007,PLAN_TYPE_MISMATCH,High,Compliance,Delivering plan type does not match receiving account type.,Transfer_Form: Traditional IRA vs Roth IRA.,Correct transfer form or open matching receiving account.,OPEN,2026-01-24T13:05:00Z
-EX-4006,H-1007,,GOV_ID_ILLEGIBLE,High,Compliance,Government ID is illegible; OCR confidence too low.,Government_ID OCR confidence 0.32; key fields unreadable.,Request a clearer ID scan.,OPEN,2026-01-23T10:22:00Z

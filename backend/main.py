@@ -2,7 +2,6 @@ import logging
 from typing import Any, Dict, Optional
 
 from fastapi import FastAPI, Request
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
@@ -20,18 +19,6 @@ logger = logging.getLogger(__name__)
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Transition OS Backend")
-
-origins = [o.strip() for o in settings.CORS_ALLOW_ORIGINS.split(",") if o.strip()]
-if not origins:
-    origins = ["*"]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 
 # --- Schemas (inline for simplicity as per prompt style, or imported) ---

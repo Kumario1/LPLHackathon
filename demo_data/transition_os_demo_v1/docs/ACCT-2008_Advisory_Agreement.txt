@@ -1,5 +1,0 @@
-Doc Type: Advisory Agreement
-Account ID: ACCT-2008
-Client Name: Morgan Demo
-Signature: SIGNED: Morgan Demo
-Agreement Date: 2026-01-10
