@@ -3,7 +3,8 @@ import time
 import json
 import sys
 
-BASE_URL = "http://54.221.139.68:8000/api"
+ROOT_URL = "http://54.221.139.68:8000"
+API_URL = "http://54.221.139.68:8000/api"
 
 def print_header(title):
     print("\n" + "="*60)
@@ -16,11 +17,8 @@ def print_step(step, detail):
 def check_health():
     print_header("Checking Backend Health")
     try:
-        # Health check is at root, not /api/health usually, or /health
-        # README says http://54.221.139.68:8000/health/live
-        # So we must strip /api for health check
-        health_url = BASE_URL.replace("/api", "") + "/health/live"
-        response = requests.get(health_url)
+        # Health check is at root
+        response = requests.get(f"{ROOT_URL}/health/live")
         print(f"Health Status: {response.status_code}")
         print(f"Response: {response.json()}")
         if response.status_code != 200:
@@ -39,7 +37,7 @@ def scenario_onboarding():
     
     payload = {
         "workflow_type": "RECRUITED_ADVISOR",
-        "advisor_id": 1,
+        "advisor_id": "ADV_SIM_001",
         "metadata": {
             "advisor_name": "Jane Doe",
             "source_firm": "Schwab"
@@ -47,7 +45,7 @@ def scenario_onboarding():
     }
     
     print_step("Clawdbot -> Backend", f"POST /workflows with {json.dumps(payload)}")
-    response = requests.post(f"{BASE_URL}/workflows", json=payload)
+    response = requests.post(f"{ROOT_URL}/workflows", json=payload)
     
     print_step("Backend -> Clawdbot", f"Status: {response.status_code}")
     print(f"Body: {json.dumps(response.json(), indent=2)}")
@@ -61,7 +59,7 @@ def scenario_onboarding():
         return wf_id
     elif response.status_code == 404:
         print(">> POST /workflows not found. Trying GET /transitions list as fallback.")
-        response = requests.get(f"{BASE_URL}/transitions")
+        response = requests.get(f"{API_URL}/transitions")
         if response.status_code == 200 and isinstance(response.json(), list) and response.json():
              return response.json()[0].get("id")
     return None
@@ -76,7 +74,7 @@ def scenario_status(workflow_id):
     
     # Live API uses GET /transitions/{id}
     print_step("Clawdbot -> Backend", f"GET /transitions/{workflow_id}")
-    response = requests.get(f"{BASE_URL}/transitions/{workflow_id}")
+    response = requests.get(f"{API_URL}/transitions/{workflow_id}")
     
     print_step("Backend -> Clawdbot", f"Status: {response.status_code}")
     print(f"Body: {json.dumps(response.json(), indent=2)}")
@@ -91,7 +89,7 @@ def scenario_eta(workflow_id):
     
     print_step("Clawdbot -> Backend", f"GET /predictions/eta/{workflow_id}")
     # Confirmed GET via browser docs
-    response = requests.get(f"{BASE_URL}/predictions/eta/{workflow_id}")
+    response = requests.get(f"{ROOT_URL}/predictions/eta/{workflow_id}")
     
     print_step("Backend -> Clawdbot", f"Status: {response.status_code}")
     print(f"Body: {json.dumps(response.json(), indent=2)}")
@@ -109,8 +107,8 @@ def scenario_doc_validation():
         "account_type": "IRA"
     }
     
-    print_step("Clawdbot -> Backend", f"POST /skills/nigo/analyze with {json.dumps(payload)}")
-    response = requests.post(f"{BASE_URL}/skills/nigo/analyze", json=payload)
+    print_step("Clawdbot -> Backend", f"POST /documents/validate with {json.dumps(payload)}")
+    response = requests.post(f"{ROOT_URL}/documents/validate", json=payload)
     
     print_step("Backend -> Clawdbot", f"Status: {response.status_code}")
     print(f"Body: {json.dumps(response.json(), indent=2)}")
@@ -153,7 +151,7 @@ def scenario_communications(workflow_id):
     print_step("Clawdbot -> Backend", f"POST /skills/copilot/draft with {json.dumps(payload)}")
     # Adjust payload keys for live API
     live_payload = {"context": "Status update", "message_type": "email"}
-    response = requests.post(f"{BASE_URL}/skills/copilot/draft", json=live_payload)
+    response = requests.post(f"{ROOT_URL}/communications/draft", json=live_payload)
     
     print_step("Backend -> Clawdbot", f"Status: {response.status_code}")
     print(f"Body: {json.dumps(response.json(), indent=2)}")
@@ -171,7 +169,7 @@ def scenario_webhook():
     }
     
     print_step("External -> Backend", f"POST /webhooks/transfer with {json.dumps(payload)}")
-    response = requests.post(f"{BASE_URL}/webhooks/transfer", json=payload)
+    response = requests.post(f"{API_URL}/webhooks/transfer", json=payload)
     
     print_step("Backend -> External", f"Status: {response.status_code}")
     print(f"Body: {json.dumps(response.json(), indent=2)}")
