@@ -1,0 +1,5 @@
+Doc Type: Transfer Form
+Account ID: ACCT-2005
+Delivering Plan Type: Traditional IRA
+Receiving Account Type: Traditional IRA
+Estimated Assets USD: 310000

@@ -1,0 +1,4 @@
+Doc Type: Beneficiary Designation
+Account ID: ACCT-2005
+Beneficiary 1: 
+Beneficiary 2: 

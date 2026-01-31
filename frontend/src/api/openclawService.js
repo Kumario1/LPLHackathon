@@ -5,7 +5,7 @@
  * URL: ws://44.222.228.231:18789
  */
 
-const OPENCLAW_URL = import.meta.env.VITE_OPENCLAW_URL || 'ws://44.222.228.231:18789';
+const OPENCLAW_URL = import.meta.env.VITE_OPENCLAW_URL || 'ws://54.221.139.68:18789';
 
 console.log('🔌 OpenClaw WebSocket URL:', OPENCLAW_URL);
 

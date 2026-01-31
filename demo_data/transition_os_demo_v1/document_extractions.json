@@ -1,0 +1,880 @@
+[
+  {
+    "doc_id": "DOC-3001",
+    "doc_type": "Government_ID",
+    "extracted_fields": {
+      "name": "Avery Demo",
+      "dob": "1984-06-12",
+      "id_number": "ID-H-1001"
+    },
+    "confidence": 0.97,
+    "evidence_snippets": [
+      "Name: Avery Demo",
+      "ID Number: ID-H-1001"
+    ]
+  },
+  {
+    "doc_id": "DOC-3002",
+    "doc_type": "Government_ID",
+    "extracted_fields": {
+      "name": "Casey Faux",
+      "dob": "1984-06-12",
+      "id_number": "ID-H-1002"
+    },
+    "confidence": 0.97,
+    "evidence_snippets": [
+      "Name: Casey Faux",
+      "ID Number: ID-H-1002"
+    ]
+  },
+  {
+    "doc_id": "DOC-3003",
+    "doc_type": "Government_ID",
+    "extracted_fields": {
+      "name": "Riley Sample",
+      "dob": "1984-06-12",
+      "id_number": "ID-H-1003"
+    },
+    "confidence": 0.97,
+    "evidence_snippets": [
+      "Name: Riley Sample",
+      "ID Number: ID-H-1003"
+    ]
+  },
+  {
+    "doc_id": "DOC-3004",
+    "doc_type": "Government_ID",
+    "extracted_fields": {
+      "name": "Jordan Mock",
+      "dob": "1984-06-12",
+      "id_number": "ID-H-1004"
+    },
+    "confidence": 0.97,
+    "evidence_snippets": [
+      "Name: Jordan Mock",
+      "ID Number: ID-H-1004"
+    ]
+  },
+  {
+    "doc_id": "DOC-3005",
+    "doc_type": "Government_ID",
+    "extracted_fields": {
+      "name": "Morgan Demo",
+      "dob": "1984-06-12",
+      "id_number": "ID-H-1005"
+    },
+    "confidence": 0.97,
+    "evidence_snippets": [
+      "Name: Morgan Demo",
+      "ID Number: ID-H-1005"
+    ]
+  },
+  {
+    "doc_id": "DOC-3006",
+    "doc_type": "Government_ID",
+    "extracted_fields": {
+      "name": "Quinn Faux",
+      "dob": "1984-06-12",
+      "id_number": "ID-H-1006"
+    },
+    "confidence": 0.97,
+    "evidence_snippets": [
+      "Name: Quinn Faux",
+      "ID Number: ID-H-1006"
+    ]
+  },
+  {
+    "doc_id": "DOC-3007",
+    "doc_type": "Government_ID",
+    "extracted_fields": {
+      "name": "[UNREADABLE]",
+      "dob": "[UNREADABLE]",
+      "id_number": "[UNREADABLE]"
+    },
+    "confidence": 0.32,
+    "evidence_snippets": [
+      "Name: [UNREADABLE]",
+      "ID Number: [UNREADABLE]"
+    ]
+  },
+  {
+    "doc_id": "DOC-3008",
+    "doc_type": "Government_ID",
+    "extracted_fields": {
+      "name": "Taylor Demo",
+      "dob": "1984-06-12",
+      "id_number": "ID-H-1008"
+    },
+    "confidence": 0.97,
+    "evidence_snippets": [
+      "Name: Taylor Demo",
+      "ID Number: ID-H-1008"
+    ]
+  },
+  {
+    "doc_id": "DOC-3009",
+    "doc_type": "Government_ID",
+    "extracted_fields": {
+      "name": "Jamie Faux",
+      "dob": "1984-06-12",
+      "id_number": "ID-H-1009"
+    },
+    "confidence": 0.97,
+    "evidence_snippets": [
+      "Name: Jamie Faux",
+      "ID Number: ID-H-1009"
+    ]
+  },
+  {
+    "doc_id": "DOC-3010",
+    "doc_type": "Government_ID",
+    "extracted_fields": {
+      "name": "Alex Sample",
+      "dob": "1984-06-12",
+      "id_number": "ID-H-1010"
+    },
+    "confidence": 0.97,
+    "evidence_snippets": [
+      "Name: Alex Sample",
+      "ID Number: ID-H-1010"
+    ]
+  },
+  {
+    "doc_id": "DOC-3011",
+    "doc_type": "Government_ID",
+    "extracted_fields": {
+      "name": "Drew Demo",
+      "dob": "1984-06-12",
+      "id_number": "ID-H-1011"
+    },
+    "confidence": 0.97,
+    "evidence_snippets": [
+      "Name: Drew Demo",
+      "ID Number: ID-H-1011"
+    ]
+  },
+  {
+    "doc_id": "DOC-3012",
+    "doc_type": "Government_ID",
+    "extracted_fields": {
+      "name": "Rowan Faux",
+      "dob": "1984-06-12",
+      "id_number": "ID-H-1012"
+    },
+    "confidence": 0.97,
+    "evidence_snippets": [
+      "Name: Rowan Faux",
+      "ID Number: ID-H-1012"
+    ]
+  },
+  {
+    "doc_id": "DOC-3013",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Avery Demo",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Avery Demo",
+      "Signature: SIGNED: Avery Demo"
+    ]
+  },
+  {
+    "doc_id": "DOC-3014",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Taxable",
+      "receiving_account_type": "Brokerage",
+      "estimated_assets_usd": 250000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Taxable",
+      "Receiving Account Type: Brokerage"
+    ]
+  },
+  {
+    "doc_id": "DOC-3015",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Avery Demo",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Avery Demo",
+      "Signature: SIGNED: Avery Demo"
+    ]
+  },
+  {
+    "doc_id": "DOC-3016",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Traditional IRA",
+      "receiving_account_type": "Traditional IRA",
+      "estimated_assets_usd": 420000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Traditional IRA",
+      "Receiving Account Type: Traditional IRA"
+    ]
+  },
+  {
+    "doc_id": "DOC-3017",
+    "doc_type": "Beneficiary_Designation",
+    "extracted_fields": {
+      "beneficiaries": [
+        {
+          "name": "Beneficiary Test One",
+          "pct": 60
+        },
+        {
+          "name": "Beneficiary Test Two",
+          "pct": 40
+        }
+      ]
+    },
+    "confidence": 0.94,
+    "evidence_snippets": [
+      "Beneficiary 1",
+      "Beneficiary 2"
+    ]
+  },
+  {
+    "doc_id": "DOC-3018",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Casey Faux",
+      "signature_present": false,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Casey Faux",
+      "Signature: [BLANK]"
+    ]
+  },
+  {
+    "doc_id": "DOC-3019",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Taxable",
+      "receiving_account_type": "Brokerage",
+      "estimated_assets_usd": 78000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Taxable",
+      "Receiving Account Type: Brokerage"
+    ]
+  },
+  {
+    "doc_id": "DOC-3020",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Casey Faux",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Casey Faux",
+      "Signature: SIGNED: Casey Faux"
+    ]
+  },
+  {
+    "doc_id": "DOC-3021",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Roth IRA",
+      "receiving_account_type": "Roth IRA",
+      "estimated_assets_usd": 150000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Roth IRA",
+      "Receiving Account Type: Roth IRA"
+    ]
+  },
+  {
+    "doc_id": "DOC-3022",
+    "doc_type": "Beneficiary_Designation",
+    "extracted_fields": {
+      "beneficiaries": [
+        {
+          "name": "Beneficiary Test One",
+          "pct": 60
+        },
+        {
+          "name": "Beneficiary Test Two",
+          "pct": 40
+        }
+      ]
+    },
+    "confidence": 0.94,
+    "evidence_snippets": [
+      "Beneficiary 1",
+      "Beneficiary 2"
+    ]
+  },
+  {
+    "doc_id": "DOC-3023",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Riley Sample",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Riley Sample",
+      "Signature: SIGNED: Riley Sample"
+    ]
+  },
+  {
+    "doc_id": "DOC-3024",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Traditional IRA",
+      "receiving_account_type": "Traditional IRA",
+      "estimated_assets_usd": 310000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Traditional IRA",
+      "Receiving Account Type: Traditional IRA"
+    ]
+  },
+  {
+    "doc_id": "DOC-3025",
+    "doc_type": "Beneficiary_Designation",
+    "extracted_fields": {
+      "beneficiaries": []
+    },
+    "confidence": 0.94,
+    "evidence_snippets": [
+      "Beneficiary 1",
+      "Beneficiary 2"
+    ]
+  },
+  {
+    "doc_id": "DOC-3026",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Jordan Mock",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Jordan Mock",
+      "Signature: SIGNED: Jordan Mock"
+    ]
+  },
+  {
+    "doc_id": "DOC-3027",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Taxable",
+      "receiving_account_type": "Brokerage",
+      "estimated_assets_usd": 950000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Taxable",
+      "Receiving Account Type: Brokerage"
+    ]
+  },
+  {
+    "doc_id": "DOC-3028",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Jordan Mock",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Jordan Mock",
+      "Signature: SIGNED: Jordan Mock"
+    ]
+  },
+  {
+    "doc_id": "DOC-3029",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Traditional IRA",
+      "receiving_account_type": "Roth IRA",
+      "estimated_assets_usd": 205000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Traditional IRA",
+      "Receiving Account Type: Roth IRA"
+    ]
+  },
+  {
+    "doc_id": "DOC-3030",
+    "doc_type": "Beneficiary_Designation",
+    "extracted_fields": {
+      "beneficiaries": [
+        {
+          "name": "Beneficiary Test One",
+          "pct": 60
+        },
+        {
+          "name": "Beneficiary Test Two",
+          "pct": 40
+        }
+      ]
+    },
+    "confidence": 0.94,
+    "evidence_snippets": [
+      "Beneficiary 1",
+      "Beneficiary 2"
+    ]
+  },
+  {
+    "doc_id": "DOC-3031",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Morgan Demo",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Morgan Demo",
+      "Signature: SIGNED: Morgan Demo"
+    ]
+  },
+  {
+    "doc_id": "DOC-3032",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Taxable",
+      "receiving_account_type": "Brokerage",
+      "estimated_assets_usd": 52000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Taxable",
+      "Receiving Account Type: Brokerage"
+    ]
+  },
+  {
+    "doc_id": "DOC-3033",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Morgan Demo",
+      "signature_present": false,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Morgan Demo",
+      "Signature: [BLANK]"
+    ]
+  },
+  {
+    "doc_id": "DOC-3034",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Taxable",
+      "receiving_account_type": "Brokerage",
+      "estimated_assets_usd": 640000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Taxable",
+      "Receiving Account Type: Brokerage"
+    ]
+  },
+  {
+    "doc_id": "DOC-3035",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Quinn Faux",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Quinn Faux",
+      "Signature: SIGNED: Quinn Faux"
+    ]
+  },
+  {
+    "doc_id": "DOC-3036",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Roth IRA",
+      "receiving_account_type": "Roth IRA",
+      "estimated_assets_usd": 90000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Roth IRA",
+      "Receiving Account Type: Roth IRA"
+    ]
+  },
+  {
+    "doc_id": "DOC-3037",
+    "doc_type": "Beneficiary_Designation",
+    "extracted_fields": {
+      "beneficiaries": []
+    },
+    "confidence": 0.94,
+    "evidence_snippets": [
+      "Beneficiary 1",
+      "Beneficiary 2"
+    ]
+  },
+  {
+    "doc_id": "DOC-3038",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Quinn Faux",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Quinn Faux",
+      "Signature: SIGNED: Quinn Faux"
+    ]
+  },
+  {
+    "doc_id": "DOC-3039",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Taxable",
+      "receiving_account_type": "Brokerage",
+      "estimated_assets_usd": 1300000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Taxable",
+      "Receiving Account Type: Brokerage"
+    ]
+  },
+  {
+    "doc_id": "DOC-3040",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Parker Sample",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Parker Sample",
+      "Signature: SIGNED: Parker Sample"
+    ]
+  },
+  {
+    "doc_id": "DOC-3041",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Taxable",
+      "receiving_account_type": "Brokerage",
+      "estimated_assets_usd": 460000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Taxable",
+      "Receiving Account Type: Brokerage"
+    ]
+  },
+  {
+    "doc_id": "DOC-3042",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Taylor Demo",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Taylor Demo",
+      "Signature: SIGNED: Taylor Demo"
+    ]
+  },
+  {
+    "doc_id": "DOC-3043",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Taxable",
+      "receiving_account_type": "Brokerage",
+      "estimated_assets_usd": 2750000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Taxable",
+      "Receiving Account Type: Brokerage"
+    ]
+  },
+  {
+    "doc_id": "DOC-3044",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Taylor Demo",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Taylor Demo",
+      "Signature: SIGNED: Taylor Demo"
+    ]
+  },
+  {
+    "doc_id": "DOC-3045",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Roth IRA",
+      "receiving_account_type": "Roth IRA",
+      "estimated_assets_usd": 185000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Roth IRA",
+      "Receiving Account Type: Roth IRA"
+    ]
+  },
+  {
+    "doc_id": "DOC-3046",
+    "doc_type": "Beneficiary_Designation",
+    "extracted_fields": {
+      "beneficiaries": [
+        {
+          "name": "Beneficiary Test One",
+          "pct": 60
+        },
+        {
+          "name": "Beneficiary Test Two",
+          "pct": 40
+        }
+      ]
+    },
+    "confidence": 0.94,
+    "evidence_snippets": [
+      "Beneficiary 1",
+      "Beneficiary 2"
+    ]
+  },
+  {
+    "doc_id": "DOC-3047",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Jamie Faux",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Jamie Faux",
+      "Signature: SIGNED: Jamie Faux"
+    ]
+  },
+  {
+    "doc_id": "DOC-3048",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Taxable",
+      "receiving_account_type": "Brokerage",
+      "estimated_assets_usd": 340000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Taxable",
+      "Receiving Account Type: Brokerage"
+    ]
+  },
+  {
+    "doc_id": "DOC-3049",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Jamie Faux",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Jamie Faux",
+      "Signature: SIGNED: Jamie Faux"
+    ]
+  },
+  {
+    "doc_id": "DOC-3050",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Traditional IRA",
+      "receiving_account_type": "Traditional IRA",
+      "estimated_assets_usd": 720000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Traditional IRA",
+      "Receiving Account Type: Traditional IRA"
+    ]
+  },
+  {
+    "doc_id": "DOC-3051",
+    "doc_type": "Beneficiary_Designation",
+    "extracted_fields": {
+      "beneficiaries": [
+        {
+          "name": "Beneficiary Test One",
+          "pct": 60
+        },
+        {
+          "name": "Beneficiary Test Two",
+          "pct": 40
+        }
+      ]
+    },
+    "confidence": 0.94,
+    "evidence_snippets": [
+      "Beneficiary 1",
+      "Beneficiary 2"
+    ]
+  },
+  {
+    "doc_id": "DOC-3052",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Alex Sample",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Alex Sample",
+      "Signature: SIGNED: Alex Sample"
+    ]
+  },
+  {
+    "doc_id": "DOC-3053",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Taxable",
+      "receiving_account_type": "Brokerage",
+      "estimated_assets_usd": 510000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Taxable",
+      "Receiving Account Type: Brokerage"
+    ]
+  },
+  {
+    "doc_id": "DOC-3054",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Alex Sample",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Alex Sample",
+      "Signature: SIGNED: Alex Sample"
+    ]
+  },
+  {
+    "doc_id": "DOC-3055",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Taxable",
+      "receiving_account_type": "Brokerage",
+      "estimated_assets_usd": 61000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Taxable",
+      "Receiving Account Type: Brokerage"
+    ]
+  },
+  {
+    "doc_id": "DOC-3056",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Drew Demo",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Drew Demo",
+      "Signature: SIGNED: Drew Demo"
+    ]
+  },
+  {
+    "doc_id": "DOC-3057",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Traditional IRA",
+      "receiving_account_type": "Traditional IRA",
+      "estimated_assets_usd": 455000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Traditional IRA",
+      "Receiving Account Type: Traditional IRA"
+    ]
+  },
+  {
+    "doc_id": "DOC-3058",
+    "doc_type": "Beneficiary_Designation",
+    "extracted_fields": {
+      "beneficiaries": [
+        {
+          "name": "Beneficiary Test One",
+          "pct": 60
+        },
+        {
+          "name": "Beneficiary Test Two",
+          "pct": 40
+        }
+      ]
+    },
+    "confidence": 0.94,
+    "evidence_snippets": [
+      "Beneficiary 1",
+      "Beneficiary 2"
+    ]
+  },
+  {
+    "doc_id": "DOC-3059",
+    "doc_type": "Advisory_Agreement",
+    "extracted_fields": {
+      "client_name": "Rowan Faux",
+      "signature_present": true,
+      "agreement_date": "2026-01-10"
+    },
+    "confidence": 0.96,
+    "evidence_snippets": [
+      "Client Name: Rowan Faux",
+      "Signature: SIGNED: Rowan Faux"
+    ]
+  },
+  {
+    "doc_id": "DOC-3060",
+    "doc_type": "Transfer_Form",
+    "extracted_fields": {
+      "delivering_plan_type": "Taxable",
+      "receiving_account_type": "Brokerage",
+      "estimated_assets_usd": 125000
+    },
+    "confidence": 0.93,
+    "evidence_snippets": [
+      "Delivering Plan Type: Taxable",
+      "Receiving Account Type: Brokerage"
+    ]
+  }
+]

@@ -1,0 +1,4 @@
+Doc Type: Beneficiary Designation
+Account ID: ACCT-2002
+Beneficiary 1: Beneficiary Test One (60%)
+Beneficiary 2: Beneficiary Test Two (40%)

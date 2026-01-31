@@ -6,7 +6,7 @@
  */
 
 // Configuration - Clawdbot API on OpenClaw EC2
-const CLAWDBOT_BASE_URL = import.meta.env.VITE_CLAWDBOT_URL || 'http://44.222.228.231:8080';
+const CLAWDBOT_BASE_URL = import.meta.env.VITE_CLAWDBOT_URL || 'http://54.221.139.68:8080';
 
 console.log('🔌 Clawdbot Service URL:', CLAWDBOT_BASE_URL);
 

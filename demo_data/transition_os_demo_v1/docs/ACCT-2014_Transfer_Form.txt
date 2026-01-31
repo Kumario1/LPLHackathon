@@ -1,0 +1,5 @@
+Doc Type: Transfer Form
+Account ID: ACCT-2014
+Delivering Plan Type: Roth IRA
+Receiving Account Type: Roth IRA
+Estimated Assets USD: 185000

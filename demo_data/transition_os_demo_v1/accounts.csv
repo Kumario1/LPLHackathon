@@ -1,0 +1,21 @@
+account_id,household_id,account_type,registration,delivering_institution,receiving_platform,delivering_plan_type,receiving_account_type,estimated_assets_usd,status
+ACCT-2001,H-1001,Taxable Brokerage,Joint,Custodian Alpha,Transition OS Platform,Taxable,Brokerage,250000,READY
+ACCT-2002,H-1001,IRA,Traditional IRA,Custodian Beta,Transition OS Platform,Traditional IRA,Traditional IRA,420000,READY
+ACCT-2003,H-1002,Taxable Brokerage,Individual,Custodian Beta,Transition OS Platform,Taxable,Brokerage,78000,NIGO_HOLD
+ACCT-2004,H-1002,IRA,Roth IRA,Custodian Alpha,Transition OS Platform,Roth IRA,Roth IRA,150000,NIGO_HOLD
+ACCT-2005,H-1003,IRA,Traditional IRA,Custodian Gamma,Transition OS Platform,Traditional IRA,Traditional IRA,310000,IN_PROGRESS
+ACCT-2006,H-1004,Taxable Brokerage,Joint,Custodian Alpha,Transition OS Platform,Taxable,Brokerage,950000,NIGO_HOLD
+ACCT-2007,H-1004,IRA,Traditional IRA,Custodian Beta,Transition OS Platform,Traditional IRA,Roth IRA,205000,NIGO_HOLD
+ACCT-2008,H-1005,Taxable Brokerage,Individual,Custodian Gamma,Transition OS Platform,Taxable,Brokerage,52000,NIGO_HOLD
+ACCT-2009,H-1005,Taxable Brokerage,Joint,Custodian Alpha,Transition OS Platform,Taxable,Brokerage,640000,NIGO_HOLD
+ACCT-2010,H-1006,IRA,Roth IRA,Custodian Beta,Transition OS Platform,Roth IRA,Roth IRA,90000,IN_PROGRESS
+ACCT-2011,H-1006,Taxable Brokerage,Individual,Custodian Gamma,Transition OS Platform,Taxable,Brokerage,1300000,IN_PROGRESS
+ACCT-2012,H-1007,Taxable Brokerage,Individual,Custodian Alpha,Transition OS Platform,Taxable,Brokerage,460000,NIGO_HOLD
+ACCT-2013,H-1008,Taxable Brokerage,Joint,Custodian Beta,Transition OS Platform,Taxable,Brokerage,2750000,READY
+ACCT-2014,H-1008,IRA,Roth IRA,Custodian Gamma,Transition OS Platform,Roth IRA,Roth IRA,185000,READY
+ACCT-2015,H-1009,Taxable Brokerage,Individual,Custodian Alpha,Transition OS Platform,Taxable,Brokerage,340000,IN_PROGRESS
+ACCT-2016,H-1009,IRA,Traditional IRA,Custodian Beta,Transition OS Platform,Traditional IRA,Traditional IRA,720000,IN_PROGRESS
+ACCT-2017,H-1010,Taxable Brokerage,Joint,Custodian Gamma,Transition OS Platform,Taxable,Brokerage,510000,READY
+ACCT-2018,H-1010,Taxable Brokerage,Individual,Custodian Alpha,Transition OS Platform,Taxable,Brokerage,61000,READY
+ACCT-2019,H-1011,IRA,Traditional IRA,Custodian Beta,Transition OS Platform,Traditional IRA,Traditional IRA,455000,IN_PROGRESS
+ACCT-2020,H-1012,Taxable Brokerage,Individual,Custodian Gamma,Transition OS Platform,Taxable,Brokerage,125000,COMPLETE

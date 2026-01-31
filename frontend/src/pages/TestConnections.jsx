@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { clawdbotService } from '../api/clawdbotService';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://54.221.139.68:8000';
-const CLAWDBOT_URL = import.meta.env.VITE_CLAWDBOT_URL || 'http://44.222.228.231:8080';
-const OPENCLAW_URL = import.meta.env.VITE_OPENCLAW_URL || 'ws://44.222.228.231:18789';
+const CLAWDBOT_URL = import.meta.env.VITE_CLAWDBOT_URL || 'http://54.221.139.68:8080';
+const OPENCLAW_URL = import.meta.env.VITE_OPENCLAW_URL || 'ws://54.221.139.68:18789';
 
 export default function TestConnections() {
   const [results, setResults] = useState({});

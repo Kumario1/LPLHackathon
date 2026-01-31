@@ -1,0 +1,13 @@
+household_id,advisor_id,household_name,primary_contact,email,phone,status,stall_risk,attrition_risk,risk_reasons
+H-1001,ADV-001,Orion Test Family,Avery Demo,avery.orion@example.com,555-0101,READY_TO_SUBMIT,22,18,fast document turnaround; high engagement; assets consolidated
+H-1002,ADV-001,Northwind Demo Household,Casey Faux,casey.northwind@example.com,555-0102,BLOCKED,68,44,missing signature; unresponsive to follow-ups; legacy paperwork
+H-1003,ADV-001,Summit Test Family,Riley Sample,riley.summit@example.com,555-0103,IN_PROGRESS,55,32,beneficiary missing; waiting on IRA data; travel schedule
+H-1004,ADV-001,Harbor Demo Partners,Jordan Mock,jordan.harbor@example.com,555-0104,BLOCKED,72,51,plan type mismatch; compliance review needed; tight deadline
+H-1005,ADV-001,Cedar Test Household,Morgan Demo,morgan.cedar@example.com,555-0105,BLOCKED,63,39,missing advisory signature; paper forms pending; low responsiveness
+H-1006,ADV-001,Lumen Demo Family,Quinn Faux,quinn.lumen@example.com,555-0106,IN_PROGRESS,58,35,beneficiary designation incomplete; needs call back; multi-account setup
+H-1007,ADV-001,Atlas Test Household,Parker Sample,parker.atlas@example.com,555-0107,BLOCKED,70,47,illegible ID; compliance hold; needs rescan
+H-1008,ADV-001,Pioneer Demo Family,Taylor Demo,taylor.pioneer@example.com,555-0108,READY_TO_SUBMIT,20,15,clean docs; quick turnaround; high engagement
+H-1009,ADV-001,Ridge Test Family,Jamie Faux,jamie.ridge@example.com,555-0109,IN_PROGRESS,49,28,docs still classifying; awaiting transfer form; busy season
+H-1010,ADV-001,Solstice Demo Household,Alex Sample,alex.solstice@example.com,555-0110,READY_TO_SUBMIT,24,19,no exceptions; forms complete; advisor follow-up done
+H-1011,ADV-001,Canyon Test Family,Drew Demo,drew.canyon@example.com,555-0111,IN_PROGRESS,41,26,intake incomplete; pending account setup; scheduling conflict
+H-1012,ADV-001,Mariner Demo Household,Rowan Faux,rowan.mariner@example.com,555-0112,COMPLETE,10,8,all tasks completed; transfer reconciled

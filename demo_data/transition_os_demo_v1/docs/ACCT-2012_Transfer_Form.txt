@@ -1,0 +1,5 @@
+Doc Type: Transfer Form
+Account ID: ACCT-2012
+Delivering Plan Type: Taxable
+Receiving Account Type: Brokerage
+Estimated Assets USD: 460000
