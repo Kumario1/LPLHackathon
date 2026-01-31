@@ -15,9 +15,10 @@ def test_eta_stub(client):
     data = response.json()
     assert data["score"] == 0.85
 
-def test_workflow_create_stub_not_implemented(client):
-    # Should return 501 because the Stub raises NotImplementedError
+def test_workflow_create_stub_success(client):
+    # Should return 200 because the Orchestrator now implements a stub
     response = client.post("/api/workflows", json={"workflow_type": "TEST", "advisor_id": 1})
-    assert response.status_code == 501
+    assert response.status_code == 200
     data = response.json()
-    assert data["status"] == "NOT_IMPLEMENTED"
+    assert data == 999
+
