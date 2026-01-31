@@ -33,7 +33,7 @@ venv/
 *.db
 *.sqlite
 *.sqlite3
-transition_os.db
+*.db
 
 # Logs
 *.log
