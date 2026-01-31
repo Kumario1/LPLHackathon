@@ -2,6 +2,14 @@
 
 This directory contains the frontend for the Transition OS application.
 
+## 🌐 Deployed Services
+
+| Service | URL |
+|---------|-----|
+| OpenClaw Gateway | `ws://44.222.228.231:18789` |
+| Clawdbot API | `http://44.222.228.231:8080` |
+| Backend API | `http://54.221.139.68:8000` |
+
 ## Prerequisites
 
 - Node.js (v18 or higher)
@@ -14,7 +22,9 @@ This directory contains the frontend for the Transition OS application.
    npm install
    ```
 
-2. Run the development server:
+2. The `.env` file is already configured with deployed service URLs.
+
+3. Run the development server:
    ```bash
    npm run dev
    ```
