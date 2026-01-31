@@ -1,5 +1,5 @@
 [Unit]
-Description=Clawdbot API (OpenClaw)
+Description=OpenClaw WebSocket Gateway
 After=network.target
 
 [Service]
@@ -8,7 +8,7 @@ Group=www-data
 WorkingDirectory=/home/ubuntu/LPLHackathon-1
 EnvironmentFile=/home/ubuntu/LPLHackathon-1/openclaw/.env
 Environment="PATH=/home/ubuntu/LPLHackathon-1/venv/bin"
-ExecStart=/home/ubuntu/LPLHackathon-1/venv/bin/uvicorn openclaw.clawdbot_server:app --host 0.0.0.0 --port 8080
+ExecStart=/home/ubuntu/LPLHackathon-1/venv/bin/uvicorn openclaw.openclaw_gateway:app --host 0.0.0.0 --port 18789
 Restart=always
 
 [Install]

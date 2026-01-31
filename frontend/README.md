@@ -2,13 +2,13 @@
 
 This directory contains the frontend for the Transition OS application.
 
-## 🌐 Deployed Services
+## 🌐 Service Configuration
 
-| Service | URL |
-|---------|-----|
-| OpenClaw Gateway | `ws://44.222.228.231:18789` |
-| Clawdbot API | `http://44.222.228.231:8080` |
-| Backend API | `http://54.221.139.68:8000` |
+Configure URLs via `frontend/.env` (see `.env.example`):
+
+- `VITE_OPENCLAW_URL` (WebSocket for OpenClaw chat)
+- `VITE_CLAWDBOT_URL` (HTTP API for Clawdbot endpoints)
+- `VITE_BACKEND_URL` (direct backend API)
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ This directory contains the frontend for the Transition OS application.
    npm install
    ```
 
-2. The `.env` file is already configured with deployed service URLs.
+2. Copy `.env.example` → `.env` and update the service URLs.
 
 3. Run the development server:
    ```bash
