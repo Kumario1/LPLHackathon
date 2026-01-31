@@ -5,8 +5,10 @@
  * It provides methods to interact with the AI assistant and access backend data.
  */
 
-// Configuration - Uses environment variables or falls back to deployed EC2
+// Configuration - Clawdbot API on OpenClaw EC2
 const CLAWDBOT_BASE_URL = import.meta.env.VITE_CLAWDBOT_URL || 'http://44.222.228.231:8080';
+
+console.log('🔌 Clawdbot Service URL:', CLAWDBOT_BASE_URL);
 
 /**
  * Make an API request to Clawdbot

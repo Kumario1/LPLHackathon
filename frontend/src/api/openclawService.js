@@ -7,6 +7,8 @@
 
 const OPENCLAW_URL = import.meta.env.VITE_OPENCLAW_URL || 'ws://44.222.228.231:18789';
 
+console.log('🔌 OpenClaw WebSocket URL:', OPENCLAW_URL);
+
 class OpenClawService {
   constructor() {
     this.ws = null;
